@@ -9,6 +9,8 @@ CMainApp::CMainApp()
 {
 	//git Test
 	//git Test2
+	//git Test1
+
 	//ax + by + c = 0;
 
 	//ax + by + cz + d = 0;
