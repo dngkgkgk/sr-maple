@@ -13,6 +13,7 @@ CMainApp::CMainApp()
 	//git Test3
 	//git Test4
 	//git sex
+	//git Test10
 
 	//ax + by + c = 0;
 
