@@ -31,7 +31,7 @@ bool CCollisionMgr::CollisionCheck(class CTransform * p1Trans, class CTransform 
 	}
 	else
 	{
-		p1Trans->Down(fTimeDelta);
+		//p1Trans->Down(fTimeDelta);
 		return false;
 	}
 	// 단순 충돌검사

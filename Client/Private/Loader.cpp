@@ -140,6 +140,10 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/cow/M_%d.png"), 24))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_MonkeyMonster"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Monkey/monkey%d.png"), 17))))
+		return E_FAIL;
+
 
 	/* ¸ðµ¨ ·Îµù Áß. */
 	//lstrcpy(m_szLoadingText, TEXT("¸ðµ¨ ·Îµù Áß."));

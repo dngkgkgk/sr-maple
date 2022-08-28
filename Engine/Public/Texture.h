@@ -8,6 +8,17 @@ class ENGINE_DLL CTexture final : public CComponent
 {
 public:
 	enum TYPE { TYPE_DEFAULT, TYPE_CUBEMAP, TYPE_END };
+
+public:
+	typedef struct tagFrame
+	{
+		_float		FirstFrame;
+		_float		EndFrame;
+		_float		FrameTime;
+		_float	    FrameSpeed;
+		_float		OriginFrame;
+	}FRAMETEXTURE;
+
 private:
 	CTexture(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CTexture(const CTexture& rhs);
@@ -19,7 +30,7 @@ public:
 
 public:
 	HRESULT Bind_OnGraphicDev(_uint iIndex = 0);
-	HRESULT Bind_FrameMove(_uint _uFirstFrame,_uint _EndFrame,_float _fFrameSpeed, _float fTimeDelta);
+	HRESULT Bind_FrameMove();
 
 private:
 	_uint										m_iNumTextures = 0;
@@ -28,7 +39,7 @@ private:
 	//LPDIRECT3DTEXTURE9
 
 	// 프레임 구조체;
-private:
+public:
 	FRAMETEXTURE	m_FrameTexture;
 
 
