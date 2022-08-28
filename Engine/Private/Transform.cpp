@@ -122,6 +122,8 @@ void CTransform::Up(_float fTimeDelta)
 	_float3		vPosition = Get_State(CTransform::STATE_POSITION);
 	_float3		vUp = Get_State(CTransform::STATE_UP);
 
+	m_TransformDesc.fSpeedPerSec = 9.8f;
+
 	vPosition += *D3DXVec3Normalize(&vUp, &vUp) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
 
 	Set_State(CTransform::STATE_POSITION, vPosition);

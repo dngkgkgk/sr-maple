@@ -25,6 +25,7 @@ bool CCollisionMgr::CollisionCheck(class CTransform * p1Trans, class CTransform 
 		((p1pos.y - fy1 <= p2pos.y + fy2) && (p1pos.y + fy1 >= p2pos.y - fy2)) &&
 		((p1pos.z - fz1 <= p2pos.z + fz2) && (p1pos.z + fz1 >= p2pos.z - fz2)))
 	{
+
 		p1Trans->Set_Jump(false);
 		p1Trans->Set_Fall(false);
 	//	/*p1Trans->Set_State(CTransform::STATE_POSITION, _float3(p1Trans->Get_State(CTransform::STATE_POSITION).x,
@@ -131,15 +132,30 @@ bool CCollisionMgr::CollisionCheck(class CTransform * p1Trans, class CTransform 
 			else if (p1pos.z < p2pos.z)
 				p1Trans->Go_Backward(fTimeDelta);
 		}
+
 		return true;
 	}
 	else
 	{
+
 		//p1Trans->Set_Fall(true);
+
 		return false;
 	}
 	// 단순 충돌검사
 	// 앞뒤왼오위아래 6면 따로 검사해야함
+
+	return false;
+}
+
+bool CCollisionMgr::CollisionPlayer(CTransform * pPlayer, CTransform * pMonster, _float fTimeDelta)
+{
+	return false;
+}
+
+bool CCollisionMgr::CollisionSkill(CTransform * pPlayer_Skill, CTransform * pMonster, _float fTimeDelta)
+{
+	return false;
 }
 
 bool CCollisionMgr::CollisionBlock(CTransform * p1Trans, CTransform * p2Trans, _float fTimeDelta)

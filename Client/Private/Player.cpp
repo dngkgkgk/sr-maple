@@ -16,7 +16,7 @@ HRESULT CPlayer::Initialize_Prototype()
 {
 	if (FAILED(__super::Initialize_Prototype()))
 		return E_FAIL;
-
+	
 	return S_OK;
 }
 
@@ -41,31 +41,65 @@ void CPlayer::Tick(_float fTimeDelta)
 
 	m_pTransformCom->Save_Collision_Pos(fTimeDelta);
 
+	m_uFrameNum = m_uFrameNum + 0.2f;
+
+	//m_fFrameTime += fTimeDelta;
+
+	m_pTransformCom->Down(fTimeDelta*1.0f);
+
+
 	if (GetKeyState(VK_UP) < 0)
 	{
 		m_pTransformCom->Go_Straight(fTimeDelta);
+		m_ePlayer_State = CPlayer::UP_STATE;
+		m_ePlayer_Attack = CPlayer::UP_ATTACK;
+		m_bPlayer_Move = true;
+		m_bPlayer_Idle = false;
+		m_bPlayer_Attack = true;
 	}
 
-	if (GetKeyState(VK_DOWN) < 0)
+	else if (GetKeyState(VK_DOWN) < 0 )
 	{
 		m_pTransformCom->Go_Backward(fTimeDelta);
+		m_ePlayer_State = CPlayer::DOWN_STATE;
+		m_ePlayer_Attack = CPlayer::DOWN_ATTACK;
+		m_bPlayer_Move = true;
+		m_bPlayer_Attack = true;
+		m_bPlayer_Idle = false;
+
+	
 	}
 
-	if (GetKeyState(VK_LEFT) < 0)
+	else if (GetKeyState(VK_LEFT) < 0 )
 	{
 		m_pTransformCom->Go_Left(fTimeDelta);
+		m_ePlayer_State = CPlayer::LEFT_STATE;
+		m_ePlayer_Attack = CPlayer::LEFT_ATTACK;
+		m_bPlayer_Move = true;
+		m_bPlayer_Attack = true;
+		m_bPlayer_Idle = false;
+
+
 	}
 
-	if (GetKeyState(VK_RIGHT) < 0)
+	else if (GetKeyState(VK_RIGHT) < 0 )
 	{
 		m_pTransformCom->Go_Right(fTimeDelta);
+		m_ePlayer_State = CPlayer::RIGHT_STATE;
+		m_ePlayer_Attack = CPlayer::RIGHT_ATTACK;
+		m_bPlayer_Move = true;
+		m_bPlayer_Attack = true;
+		m_bPlayer_Idle = false;
+
 	}
+
 
 	_uint			Keyboard;
 	bool			bDown = false;
 	if (Keyboard = pGameInstance->Get_DIKState(DIK_Z))
 	{
-		m_pTransformCom->Up(fTimeDelta*2.f);
+		m_ePlayer_State = PLAYER_ATTACK;
+		
 	}
 	
 	if (Keyboard = pGameInstance->Get_DIKState(DIK_X))
@@ -80,7 +114,38 @@ void CPlayer::Tick(_float fTimeDelta)
 		m_pTransformCom->Set_Fall(true);
 	}
 
+
 	m_pTransformCom->Jump(fTimeDelta, m_fJumpPower, m_fFallSpeed);
+
+	else if (GetKeyState('Z') & 0x8000)
+	{
+		m_pTransformCom->Jump_On(fTimeDelta*2.4f);
+
+	}
+	/////////////////////////////////////////////
+
+	if (m_ePlayer_State == UP_STATE&&m_bPlayer_Move==true && m_bPlayer_Attack == false)
+	{
+		Player_Move(UP_STATE, fTimeDelta);
+	}
+	else if (m_ePlayer_State == RIGHT_STATE&&m_bPlayer_Move == true && m_bPlayer_Attack == false)
+	{
+		Player_Move(RIGHT_STATE, fTimeDelta);
+	}
+	else if (m_ePlayer_State == LEFT_STATE&&m_bPlayer_Move == true && m_bPlayer_Attack == false)
+	{
+		Player_Move(LEFT_STATE, fTimeDelta);
+	}
+	else if (m_ePlayer_State == DOWN_STATE&&m_bPlayer_Move == true&& m_bPlayer_Attack ==false)
+	{
+		Player_Move(DOWN_STATE, fTimeDelta);
+	}
+	else if (m_ePlayer_State == PLAYER_ATTACK&&m_bPlayer_Move == false&&m_bPlayer_Attack==true)
+	{
+		Player_Attack(m_ePlayer_State, m_ePlayer_Attack,fTimeDelta);
+	}
+	////////////////////////////////////////////
+
 
 	if (m_pTransformCom->Get_Jump())			
 		m_fJumpPower = 2.f;	
@@ -111,15 +176,6 @@ void CPlayer::Late_Tick(_float fTimeDelta)
 {
 	__super::Late_Tick(fTimeDelta);
 
-	//_float4x4		ViewMatrix;
-
-	//m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);//이게 카메라
-
-	//D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
-
-	//m_pTransformCom->Set_State(CTransform::STATE_RIGHT, *(_float3*)&ViewMatrix.m[0][0]);
-	////m_pTransformCom->Set_State(CTransform::STATE_UP, *(_float3*)&ViewMatrix.m[1][0]);
-	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, *(_float3*)&ViewMatrix.m[2][0]);
 
 	if (nullptr != m_pRendererCom)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
@@ -133,7 +189,7 @@ HRESULT CPlayer::Render()
 	if (FAILED(m_pTransformCom->Bind_OnGraphicDev()))
 		return E_FAIL;
 
-	if (FAILED(m_pTextureCom->Bind_OnGraphicDev(1)))
+	if (FAILED(m_pTextureCom->Bind_OnGraphicDev(m_uFrameNum)))
 		return E_FAIL;
 
 	if (FAILED(SetUp_RenderState()))
@@ -154,11 +210,11 @@ HRESULT CPlayer::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
-	if (FAILED(__super::Add_Components(TEXT("Com_VIBuffer"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Cube"), (CComponent**)&m_pVIBufferCom)))
+	if (FAILED(__super::Add_Components(TEXT("Com_VIBuffer"), LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"), (CComponent**)&m_pVIBufferCom)))
 		return E_FAIL;
 
 
@@ -174,7 +230,6 @@ HRESULT CPlayer::SetUp_Components()
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(1.0f, 4.0f, 1.0f));
 
-	//m_bOnBlock = false;
 
 	return S_OK;
 }
@@ -185,15 +240,91 @@ HRESULT CPlayer::SetUp_RenderState()
 		return E_FAIL;	
 
 	//m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 250);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL);
 	return S_OK;
 }
 
 HRESULT CPlayer::Release_RenderState()
 {
 	//m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	//m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 
 	return S_OK;
+}
+
+void CPlayer::Player_Idel(PLAYER_STATE _PlayerState,_float fTimeDelta)
+{
+	if (m_ePlayer_State==PLAYER_IDLE&&m_bPlayer_Idle == true)
+	{
+		if (m_uFrameNum <= 0 || m_uFrameNum >= 7)
+		{
+			m_uFrameNum = 0;
+
+		}
+	}
+		
+		
+}
+void CPlayer::Player_Move(PLAYER_STATE _PlayerState, _float fTimeDelta)
+{
+
+
+	if (m_ePlayer_State == UP_STATE)
+	{
+		if (m_uFrameNum <= 8 || m_uFrameNum >= 15)
+		{
+			m_uFrameNum = 8;
+
+		}
+
+	}
+	else if (m_ePlayer_State == RIGHT_STATE)
+	{
+		if (m_uFrameNum <= 16 || m_uFrameNum >= 23)
+		{
+			m_uFrameNum = 16;
+		}
+
+	}
+
+	else if (m_ePlayer_State == LEFT_STATE )
+	{
+
+		if (m_uFrameNum <= 24 || m_uFrameNum >= 32)
+		{
+			m_uFrameNum = 24;
+		}
+
+
+	}
+	else if (m_ePlayer_State == DOWN_STATE )
+	{
+		if (m_uFrameNum <= 32 || m_uFrameNum >= 40)
+		{
+			m_uFrameNum = 32;
+		}
+
+	}
+	else
+		m_ePlayer_State == PLAYER_IDLE;
+}
+
+void CPlayer::Player_Attack(PLAYER_STATE _PlayerState, PLAYER_ATTACK_ _PlayerAttack, float fTimeDelta)
+{
+
+	if (m_ePlayer_State == RIGHT_STATE ||m_ePlayer_Attack == RIGHT_ATTACK&&m_uFrameNum <= 40 || m_uFrameNum >= 47)
+	{
+		m_uFrameNum = 40;
+
+	}
+
+	 else if (m_ePlayer_State == UP_STATE||m_ePlayer_Attack == UP_ATTACK&&m_uFrameNum <= 47 || m_uFrameNum >= 55)	
+	{
+		m_uFrameNum = 48;
+
+	}
 }
 
 CPlayer * CPlayer::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

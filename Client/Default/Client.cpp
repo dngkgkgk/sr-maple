@@ -68,7 +68,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // 기본 메시지 루프입니다.
 
-	_float		fTimeAcc = 0.0f;
+	_float		fTimeAcc = 0.0f;	
+	srand(unsigned(time(NULL)));
 
 	while (true)
 	{

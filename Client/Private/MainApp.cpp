@@ -7,8 +7,6 @@
 CMainApp::CMainApp()
 	: m_pGameInstance(CGameInstance::Get_Instance())
 {
-	//git Test
-	//git Test1
 	//ax + by + c = 0;
 
 	//ax + by + cz + d = 0;
@@ -141,6 +139,7 @@ HRESULT CMainApp::SetUp_SamplerState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
+
 
 	m_pGraphic_Device->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
 	m_pGraphic_Device->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);

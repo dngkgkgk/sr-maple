@@ -35,54 +35,39 @@ void CMonster::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
 
-	iTest = iTest + 1.f;
+	m_iTextureCount += 1.f;
+
+	if (m_iTextureCount >= 4.f)
+	{
+		m_iTextureCount = 0.f;
+
+
+		int iRand = rand() % 2 + 1;
+		if (iRand == 1)
+		{
+				m_eState = STATE_RIGHT;
+		}
+		else if (iRand == 2)
+		{
+			m_eState = STATE_LEFT; 
+		}
+	}
 
 	if (m_eState == STATE_RIGHT)
 	{
-		if (iTest >= 7)
-			iTest = 0;
-	}
-	else if (m_eState == STATE_UP)
-	{
-		if (iTest < 8 || iTest > 15)
-			iTest = 8;
-
-		if (iTest >= 15)
-			iTest = 8;
-	}
-	else if (m_eState == STATE_DOWN)
-	{
-		if (iTest < 16)
-			iTest = 16;
-
-		if (iTest >= 23)
-			iTest = 16;
+		if (m_ePrevState != m_eState)
+			m_pTransformCom->Set_Scaled(_float3(-2.f, 2.f, 2.f));
 	}
 
-	if (GetKeyState(VK_UP) < 0)
+	else if (m_eState == STATE_LEFT)
 	{
-		m_pTransformCom->Go_Straight(fTimeDelta);
-		m_eState = CMonster::STATE_UP;
-	}
+		if (m_ePrevState != m_eState)
+			m_pTransformCom->Set_Scaled(_float3(-2.f, 2.f, 2.f));
 
-	if (GetKeyState(VK_DOWN) < 0)
-	{
-
-		m_pTransformCom->Go_Backward(fTimeDelta);
-		m_eState = CMonster::STATE_DOWN;
-	}
-
-	if (GetKeyState(VK_LEFT) < 0)
-	{
 		m_pTransformCom->Go_Left(fTimeDelta);
-		m_eState = CMonster::STATE_RIGHT;
 	}
 
-	if (GetKeyState(VK_RIGHT) < 0)
-	{
-		m_pTransformCom->Go_Right(fTimeDelta);
-		m_eState = CMonster::STATE_RIGHT;
-	}
+	m_ePrevState = m_eState;
 
 }
 
@@ -102,8 +87,10 @@ HRESULT CMonster::Render()
 	if (FAILED(m_pTransformCom->Bind_OnGraphicDev()))
 		return E_FAIL;
 
-	if (FAILED(m_pTextureCom->Bind_OnGraphicDev(iTest)))
-		return E_FAIL;
+//	if (FAILED(m_pTextureCom->Bind_OnGraphicDev(iTest)))
+//		return E_FAIL;
+
+	m_pTextureCom->Bind_FrameMove();
 
 	if (FAILED(SetUp_RenderState()))
 		return E_FAIL;
@@ -122,17 +109,23 @@ HRESULT CMonster::SetUp_Components()
 	if (FAILED(__super::Add_Components(TEXT("Com_Renderer"), LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), (CComponent**)&m_pRendererCom)))
 		return E_FAIL;
 
+	CTexture::FRAMETEXTURE		FrameTexture;
+	ZeroMemory(&FrameTexture, sizeof(CTexture::FRAMETEXTURE));
+	FrameTexture.FirstFrame = 0;
+	FrameTexture.OriginFrame = 0;
+	FrameTexture.EndFrame = 3;
+	FrameTexture.FrameSpeed = 0.2f;
+
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Monster3"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Components(TEXT("Com_Texture"), LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_MonkeyMonster"), (CComponent**)&m_pTextureCom, &FrameTexture)))
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
 	if (FAILED(__super::Add_Components(TEXT("Com_VIBuffer"), LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"), (CComponent**)&m_pVIBufferCom)))
 		return E_FAIL;
 
-
 	/* For.Com_Transform */
-	CTransform::TRANSFORMDESC		TransformDesc;
+	CTransform::TRANSFORMDESC      TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(CTransform::TRANSFORMDESC));
 
 	TransformDesc.fSpeedPerSec = 5.f;
@@ -156,6 +149,7 @@ HRESULT CMonster::SetUp_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 250);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL);
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	return S_OK;
 }
 
@@ -168,7 +162,7 @@ HRESULT CMonster::Release_RenderState()
 
 CMonster * CMonster::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CMonster*	pInstance = new CMonster(pGraphic_Device);
+	CMonster*   pInstance = new CMonster(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
@@ -181,7 +175,7 @@ CMonster * CMonster::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 CGameObject * CMonster::Clone(void* pArg)
 {
-	CMonster*	pInstance = new CMonster(*this);
+	CMonster*   pInstance = new CMonster(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
