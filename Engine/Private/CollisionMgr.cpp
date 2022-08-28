@@ -25,7 +25,8 @@ bool CCollisionMgr::CollisionCheck(class CTransform * p1Trans, class CTransform 
 		((p1pos.y - fy1 <= p2pos.y + fy2) && (p1pos.y + fy1 >= p2pos.y - fy2)) &&
 		((p1pos.z - fz1 <= p2pos.z + fz2) && (p1pos.z + fz1 >= p2pos.z - fz2)))
 	{
-		//p1Trans->Up(fTimeDelta);
+		p1Trans->Up(fTimeDelta);
+
 		return true;
 		//ERR_MSG(TEXT("충돌 ㅇㅅㅇ"));
 	}
@@ -36,6 +37,18 @@ bool CCollisionMgr::CollisionCheck(class CTransform * p1Trans, class CTransform 
 	}
 	// 단순 충돌검사
 	// 앞뒤왼오위아래 6면 따로 검사해야함
+
+	return false;
+}
+
+bool CCollisionMgr::CollisionPlayer(CTransform * pPlayer, CTransform * pMonster, _float fTimeDelta)
+{
+	return false;
+}
+
+bool CCollisionMgr::CollisionSkill(CTransform * pPlayer_Skill, CTransform * pMonster, _float fTimeDelta)
+{
+	return false;
 }
 
 void CCollisionMgr::Free()

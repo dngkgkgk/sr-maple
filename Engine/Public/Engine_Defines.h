@@ -24,6 +24,7 @@ using namespace std;
 #include "Engine_Struct.h"
 #include "Engine_Typedef.h"
 
+#define		VK_MAX		0xff
 
 #ifdef _DEBUG
 

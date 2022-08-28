@@ -7,11 +7,6 @@
 CMainApp::CMainApp()
 	: m_pGameInstance(CGameInstance::Get_Instance())
 {
-	//git Test
-	//git Test2
-	//git Test1
-	//git Test3
-
 	//ax + by + c = 0;
 
 	//ax + by + cz + d = 0;

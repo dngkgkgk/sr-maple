@@ -60,7 +60,7 @@ private:
 	CObject_Manager*				m_pObject_Manager = nullptr;
 	CTimer_Manager*					m_pTimer_Manager = nullptr;
 	CComponent_Manager*				m_pComponent_Manager = nullptr;
-
+	//CKeyMgr*						m_pKeyComponent_Manager = nullptr;
 public:
 	virtual void Free() override;
 };

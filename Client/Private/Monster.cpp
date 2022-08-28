@@ -57,8 +57,6 @@ void CMonster::Tick(_float fTimeDelta)
 	{
 		if (m_ePrevState != m_eState)
 			m_pTransformCom->Set_Scaled(_float3(-2.f, 2.f, 2.f));
-
-		m_pTransformCom->Go_Right(fTimeDelta);
 	}
 
 	else if (m_eState == STATE_LEFT)
