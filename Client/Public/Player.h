@@ -52,15 +52,13 @@ public:
 	virtual void Free() override;
 
 private:
-<<<<<<< HEAD
+
 	_float m_fFallSpeed = 0.f;
 	_float m_fMaxFallSpeed = 3.f;
 	_float m_fJumpPower = 0.f;
-	_uint m_uFrameNum = 0;
-=======
 
 	_float m_uFrameNum = 0;
->>>>>>> develop
+
 	_float m_fFrameTime = 0.f;
 
 	PLAYER_STATE   m_ePlayer_State= PLAYER_IDLE;

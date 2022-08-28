@@ -148,16 +148,6 @@ bool CCollisionMgr::CollisionCheck(class CTransform * p1Trans, class CTransform 
 	return false;
 }
 
-bool CCollisionMgr::CollisionPlayer(CTransform * pPlayer, CTransform * pMonster, _float fTimeDelta)
-{
-	return false;
-}
-
-bool CCollisionMgr::CollisionSkill(CTransform * pPlayer_Skill, CTransform * pMonster, _float fTimeDelta)
-{
-	return false;
-}
-
 bool CCollisionMgr::CollisionBlock(CTransform * p1Trans, CTransform * p2Trans, _float fTimeDelta)
 {
 	return false;

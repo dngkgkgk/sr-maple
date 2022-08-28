@@ -64,13 +64,10 @@ public:
 	void Up(_float fTimeDelta);
 	void Down(_float fTimeDelta);
 	void Fall(_float fTimeDelta);
-<<<<<<< HEAD
+
 	void Jump(_float fTimeDelta, _float fJumpPower, _float fFallSpeed);
 	_float3 Save_Collision_Pos(_float _fTimeDelta);
-=======
-	void Jump_On(_float fTimeDelta);
 
->>>>>>> develop
 private:
 	_float4x4			m_WorldMatrix;
 	TRANSFORMDESC		m_TransformDesc;

@@ -35,6 +35,8 @@ void CPlayer::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
 
+	m_pTransformCom->Jump(fTimeDelta, m_fJumpPower, m_fFallSpeed);
+
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 
 	Safe_AddRef(pGameInstance);
@@ -55,7 +57,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		m_ePlayer_Attack = CPlayer::UP_ATTACK;
 		m_bPlayer_Move = true;
 		m_bPlayer_Idle = false;
-		m_bPlayer_Attack = true;
+		//m_bPlayer_Attack = true;
 	}
 
 	else if (GetKeyState(VK_DOWN) < 0 )
@@ -64,7 +66,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		m_ePlayer_State = CPlayer::DOWN_STATE;
 		m_ePlayer_Attack = CPlayer::DOWN_ATTACK;
 		m_bPlayer_Move = true;
-		m_bPlayer_Attack = true;
+		//m_bPlayer_Attack = true;
 		m_bPlayer_Idle = false;
 
 	
@@ -76,7 +78,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		m_ePlayer_State = CPlayer::LEFT_STATE;
 		m_ePlayer_Attack = CPlayer::LEFT_ATTACK;
 		m_bPlayer_Move = true;
-		m_bPlayer_Attack = true;
+		//m_bPlayer_Attack = true;
 		m_bPlayer_Idle = false;
 
 
@@ -88,7 +90,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		m_ePlayer_State = CPlayer::RIGHT_STATE;
 		m_ePlayer_Attack = CPlayer::RIGHT_ATTACK;
 		m_bPlayer_Move = true;
-		m_bPlayer_Attack = true;
+		//m_bPlayer_Attack = true;
 		m_bPlayer_Idle = false;
 
 	}
@@ -115,37 +117,27 @@ void CPlayer::Tick(_float fTimeDelta)
 	}
 
 
-	m_pTransformCom->Jump(fTimeDelta, m_fJumpPower, m_fFallSpeed);
 
-	else if (GetKeyState('Z') & 0x8000)
-	{
-		m_pTransformCom->Jump_On(fTimeDelta*2.4f);
-
-	}
-	/////////////////////////////////////////////
-
-	if (m_ePlayer_State == UP_STATE&&m_bPlayer_Move==true && m_bPlayer_Attack == false)
+	if (m_ePlayer_State == UP_STATE&&m_bPlayer_Move==true)
 	{
 		Player_Move(UP_STATE, fTimeDelta);
 	}
-	else if (m_ePlayer_State == RIGHT_STATE&&m_bPlayer_Move == true && m_bPlayer_Attack == false)
+	else if (m_ePlayer_State == RIGHT_STATE&&m_bPlayer_Move == true )
 	{
 		Player_Move(RIGHT_STATE, fTimeDelta);
 	}
-	else if (m_ePlayer_State == LEFT_STATE&&m_bPlayer_Move == true && m_bPlayer_Attack == false)
+	else if (m_ePlayer_State == LEFT_STATE&&m_bPlayer_Move == true )
 	{
 		Player_Move(LEFT_STATE, fTimeDelta);
 	}
-	else if (m_ePlayer_State == DOWN_STATE&&m_bPlayer_Move == true&& m_bPlayer_Attack ==false)
+	else if (m_ePlayer_State == DOWN_STATE&&m_bPlayer_Move == true)
 	{
 		Player_Move(DOWN_STATE, fTimeDelta);
 	}
-	else if (m_ePlayer_State == PLAYER_ATTACK&&m_bPlayer_Move == false&&m_bPlayer_Attack==true)
+	else if (m_ePlayer_State == PLAYER_ATTACK&&m_bPlayer_Move == false)
 	{
 		Player_Attack(m_ePlayer_State, m_ePlayer_Attack,fTimeDelta);
 	}
-	////////////////////////////////////////////
-
 
 	if (m_pTransformCom->Get_Jump())			
 		m_fJumpPower = 2.f;	
