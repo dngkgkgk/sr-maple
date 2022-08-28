@@ -58,6 +58,8 @@ public:
 	void Up(_float fTimeDelta);
 	void Down(_float fTimeDelta);
 	void Fall(_float fTimeDelta);
+	void Jump_On(_float fTimeDelta);
+
 private:
 	_float4x4			m_WorldMatrix;
 	TRANSFORMDESC		m_TransformDesc;

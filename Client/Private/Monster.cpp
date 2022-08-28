@@ -59,6 +59,15 @@ void CMonster::Tick(_float fTimeDelta)
 			iTest = 16;
 	}
 
+	else if (m_eState == STATE_RIGHT &&m_eState == STATE_UP)
+	{
+		if (iTest < 24)
+			iTest = 24;
+
+		if (iTest >= 32)
+			iTest = 24;
+	}
+
 	if (GetKeyState(VK_UP) < 0)
 	{
 		m_pTransformCom->Go_Straight(fTimeDelta);
