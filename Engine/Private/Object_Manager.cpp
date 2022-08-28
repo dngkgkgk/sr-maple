@@ -111,11 +111,16 @@ bool CObject_Manager::Collision(_uint iLevelIndex, const _tchar * col1, const _t
 		for (auto& P2 : iter2->Get_ObjectList())
 		{
 			if (pCollision->CollisionCheck(P1->Get_Transform(), P2->Get_Transform(), fTimeDelta))
+			{
+				Safe_Release(pCollision);
 				return true;
+			}
+			else if (P1 == iter1->Get_BackObject() && P2 == iter2->Get_BackObject())
+				P1->Get_Transform()->Set_Fall(fTimeDelta);
 		}
 	}
+	Safe_Release(pCollision);	
 	return false;
-	Safe_Release(pCollision);
 }
 
 CGameObject * CObject_Manager::Find_Target(_uint iLevelIndex, const _tchar * pLayerTag)

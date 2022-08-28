@@ -142,9 +142,30 @@ void CTransform::Fall(_float fTimeDelta)
 	_float3		vPosition = Get_State(CTransform::STATE_POSITION);
 	_float3		vUp = Get_State(CTransform::STATE_UP);
 
-	vPosition -= *D3DXVec3Normalize(&vUp, &vUp) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
+	vPosition -= *D3DXVec3Normalize(&vUp, &vUp) * m_TransformDesc.fSpeedPerSec * fTimeDelta*m_fGravity*m_fGravity;
 
 	Set_State(CTransform::STATE_POSITION, vPosition);
+}
+
+void CTransform::Jump(_float fTimeDelta, _float fJumpPower, _float fFallSpeed)
+{
+	_float3		vPosition = Get_State(CTransform::STATE_POSITION);
+	_float3		vUp = Get_State(CTransform::STATE_UP);
+
+	vPosition += *D3DXVec3Normalize(&vUp, &vUp) * m_TransformDesc.fSpeedPerSec * fTimeDelta * fJumpPower -
+		*D3DXVec3Normalize(&vUp, &vUp) * m_TransformDesc.fSpeedPerSec * fTimeDelta*fFallSpeed*fFallSpeed;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+}
+
+_float3 CTransform::Save_Collision_Pos(_float _fTimeDelta)
+{
+	m_fSavePos = Get_State(CTransform::STATE_POSITION);
+
+	if (!m_bJump && !m_bJump)
+		m_bSecSave = true;
+
+	return m_fSavePos;
 }
 
 void CTransform::LookAt(_float3 vPoint)

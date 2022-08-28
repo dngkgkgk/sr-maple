@@ -11,7 +11,7 @@ public:
 
 public:
 	bool CollisionCheck(class CTransform* p1Trans, class CTransform* p2Trans, _float fTimeDelta);
-
+	bool CollisionBlock(class CTransform* p1Trans, class CTransform* p2Trans, _float fTimeDelta);
 public:
 	virtual void Free()override;
 };

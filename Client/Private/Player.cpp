@@ -33,7 +33,13 @@ HRESULT CPlayer::Initialize(void* pArg)
 
 void CPlayer::Tick(_float fTimeDelta)
 {
-	__super::Tick(fTimeDelta);		
+	__super::Tick(fTimeDelta);
+
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	Safe_AddRef(pGameInstance);
+
+	m_pTransformCom->Save_Collision_Pos(fTimeDelta);
 
 	if (GetKeyState(VK_UP) < 0)
 	{
@@ -55,16 +61,50 @@ void CPlayer::Tick(_float fTimeDelta)
 		m_pTransformCom->Go_Right(fTimeDelta);
 	}
 
-	if (GetKeyState('Z') < 0)
+	_uint			Keyboard;
+	bool			bDown = false;
+	if (Keyboard = pGameInstance->Get_DIKState(DIK_Z))
 	{
 		m_pTransformCom->Up(fTimeDelta*2.f);
 	}
+	
+	if (Keyboard = pGameInstance->Get_DIKState(DIK_X))
+	{
+		m_pTransformCom->Down(fTimeDelta);
+	}
+	//m_pTransformCom->Fall(fTimeDelta);
+	
+	if (Keyboard = pGameInstance->Get_DIKState(DIK_C))
+	{
+		m_pTransformCom->Set_Jump(true);
+		m_pTransformCom->Set_Fall(true);
+	}
 
-	
-	m_pTransformCom->Down(fTimeDelta);
-	
-	
+	m_pTransformCom->Jump(fTimeDelta, m_fJumpPower, m_fFallSpeed);
 
+	if (m_pTransformCom->Get_Jump())			
+		m_fJumpPower = 2.f;	
+	else	
+		m_fJumpPower = 0.f;
+		
+	if (m_pTransformCom->Get_Fall())
+	{
+		m_fFallSpeed += 0.05f;
+		if (m_fFallSpeed >= m_fMaxFallSpeed)
+			m_fFallSpeed = m_fMaxFallSpeed;
+	}
+	else
+		m_fFallSpeed = 0.f;
+
+	//m_pTransformCom->Set_Fall(true);
+
+	/*if (m_pTransformCom->Check_SecSavePos())
+	{
+		m_pTransformCom->Set_SecSavePosOn(false);
+		m_pTransformCom->Save_Collision_Pos(fTimeDelta);
+	}*/
+
+	Safe_Release(pGameInstance);
 }
 
 void CPlayer::Late_Tick(_float fTimeDelta)
@@ -80,8 +120,6 @@ void CPlayer::Late_Tick(_float fTimeDelta)
 	//m_pTransformCom->Set_State(CTransform::STATE_RIGHT, *(_float3*)&ViewMatrix.m[0][0]);
 	////m_pTransformCom->Set_State(CTransform::STATE_UP, *(_float3*)&ViewMatrix.m[1][0]);
 	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, *(_float3*)&ViewMatrix.m[2][0]);
-
-	
 
 	if (nullptr != m_pRendererCom)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
