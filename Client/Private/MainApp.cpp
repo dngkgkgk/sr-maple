@@ -10,6 +10,7 @@ CMainApp::CMainApp()
 	//git Test
 	//git Test2
 	//git Test1
+	//git Test3
 
 	//ax + by + c = 0;
 
