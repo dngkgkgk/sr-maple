@@ -57,7 +57,7 @@ HRESULT CGameObject::Add_Components(const _tchar * pComponentTag, _uint iLevelIn
 
 	Safe_Release(pGameInstance);
 
-	return S_OK;
+ 	return S_OK;
 }
 
 CComponent * CGameObject::Find_Component(const _tchar * pComponentTag)

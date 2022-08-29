@@ -22,6 +22,13 @@ _float3 CTransform::Get_Scale()
 	return _float3(D3DXVec3Length(&vRight), D3DXVec3Length(&vUp), D3DXVec3Length(&vLook));
 }
 
+_float CTransform::Get_ScaleX()
+{
+	_float3		vRight = Get_State(CTransform::STATE_RIGHT);
+
+	return vRight.x;
+}
+
 void CTransform::Set_Scaled(_float3 vScale)
 {
 	_float3		vRight = Get_State(CTransform::STATE_RIGHT);
