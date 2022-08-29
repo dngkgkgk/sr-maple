@@ -50,7 +50,7 @@ void CPlayer::Tick(_float fTimeDelta)
 
 	if (GetKeyState(VK_UP) < 0)
 	{
-		/*if (GetKeyState(VK_RIGHT) < 0)
+		if (GetKeyState(VK_RIGHT) < 0)
 		{
 			m_pTransformCom->Go_RT(fTimeDelta);
 			m_ePlayer_State = CPlayer::RT_STATE;
@@ -60,21 +60,20 @@ void CPlayer::Tick(_float fTimeDelta)
 		}
 		else if (GetKeyState(VK_LEFT) < 0)
 		{
-			m_pTransformCom->Go_Left(fTimeDelta);
-			m_pTransformCom->Go_Straight(fTimeDelta);
+			m_pTransformCom->Go_LT(fTimeDelta);
 			m_ePlayer_State = CPlayer::LT_STATE;
 			m_ePlayer_Attack = CPlayer::UP_ATTACK;
 			m_bPlayer_Move = true;
 			m_bPlayer_Idle = false;
 		}
 		else
-		{*/
+		{
 			m_pTransformCom->Go_Straight(fTimeDelta);
 			m_ePlayer_State = CPlayer::UP_STATE;
 			m_ePlayer_Attack = CPlayer::UP_ATTACK;
 			m_bPlayer_Move = true;
 			m_bPlayer_Idle = false;
-		//}
+		}
 	}
 
 	else if (GetKeyState(VK_DOWN) < 0 )

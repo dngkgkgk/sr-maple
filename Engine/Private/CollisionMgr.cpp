@@ -132,7 +132,8 @@ bool CCollisionMgr::CollisionCheck(class CTransform * p1Trans, class CTransform 
 			else if (p1pos.z < p2pos.z)
 				p1Trans->Go_Backward(fTimeDelta);
 		}
-
+		/*if (_uint(p1pos.y*10) % 10 <= 1.05f&&_uint(p1pos.y * 10) % 10>1)
+			p1Trans->Set_Fall(true);*/ //공중에 떠있을때 블럭 옆부분과 계속 충돌상태면 땅으로 떨어지지 않음
 		return true;
 	}
 	else
@@ -220,7 +221,6 @@ bool CCollisionMgr::Collision_Rect_Cube(CTransform * p1Trans, CTransform * p2Tra
 				p1Trans->Go_Backward(fTimeDelta);
 			}
 		}
-
 		return true;
 	}
 	else

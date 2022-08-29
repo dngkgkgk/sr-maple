@@ -119,10 +119,12 @@ bool CObject_Manager::Collision(_uint iLevelIndex, const _tchar * col1, const _t
 	return false;
 }
 
-bool CObject_Manager::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1, const _tchar * col2, _float fTimeDelta)
+int CObject_Manager::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1, const _tchar * col2, _float fTimeDelta)
 {
 	if (iLevelIndex >= m_iNumLevels)
 		return false;
+
+	int iReturn = 0;
 
 	auto iter1 = Find_Layer(iLevelIndex, col1);
 	auto iter2 = Find_Layer(iLevelIndex, col2);
@@ -133,13 +135,12 @@ bool CObject_Manager::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1
 		{
 			if (pCollision->Collision_Rect_Cube(P1->Get_Transform(), P2->Get_Transform(), fTimeDelta))
 			{
-				return true;
-			} 
-			else if (P1 == iter1->Get_BackObject() && P2 == iter2->Get_BackObject())
-				P1->Get_Transform()->Set_Fall(fTimeDelta);
+				iReturn = 1;
+			}
 		}
 	}
-	return false;
+
+	return iReturn;
 }
 
 CGameObject * CObject_Manager::Find_Target(_uint iLevelIndex, const _tchar * pLayerTag)

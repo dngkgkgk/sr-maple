@@ -1,27 +1,38 @@
-d:\jung\130\framework\client\default\x64\debug\client.pch
-d:\jung\130\framework\client\default\x64\debug\vc140.pdb
-d:\jung\130\framework\client\default\x64\debug\vc140.idb
-d:\jung\130\framework\client\default\x64\debug\stdafx.obj
-d:\jung\130\framework\client\default\x64\debug\background.obj
-d:\jung\130\framework\client\default\x64\debug\camera_dynamic.obj
-d:\jung\130\framework\client\default\x64\debug\level_gameplay.obj
-d:\jung\130\framework\client\default\x64\debug\level_loading.obj
-d:\jung\130\framework\client\default\x64\debug\level_logo.obj
-d:\jung\130\framework\client\default\x64\debug\loader.obj
-d:\jung\130\framework\client\default\x64\debug\mainapp.obj
-d:\jung\130\framework\client\default\x64\debug\terrain.obj
-d:\jung\130\framework\client\default\x64\debug\client.obj
-d:\jung\130\framework\client\bin\client.ilk
-d:\jung\130\framework\client\bin\client.exe
-d:\jung\130\framework\client\bin\client.pdb
-d:\jung\130\framework\client\default\x64\debug\client.res
-d:\jung\130\framework\client\default\..\bin\client.exe
-d:\jung\130\framework\client\default\x64\debug\client.tlog\cl.command.1.tlog
-d:\jung\130\framework\client\default\x64\debug\client.tlog\cl.read.1.tlog
-d:\jung\130\framework\client\default\x64\debug\client.tlog\cl.write.1.tlog
-d:\jung\130\framework\client\default\x64\debug\client.tlog\link.command.1.tlog
-d:\jung\130\framework\client\default\x64\debug\client.tlog\link.read.1.tlog
-d:\jung\130\framework\client\default\x64\debug\client.tlog\link.write.1.tlog
-d:\jung\130\framework\client\default\x64\debug\client.tlog\rc.command.1.tlog
-d:\jung\130\framework\client\default\x64\debug\client.tlog\rc.read.1.tlog
-d:\jung\130\framework\client\default\x64\debug\client.tlog\rc.write.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.pch
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\vc140.pdb
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\vc140.idb
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\stdafx.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\background.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\camera_dynamic.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\cubeterrain.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\level_gameplay.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\level_loading.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\level_logo.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\loader.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\mainapp.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\monster.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\sky.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\terrain.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\testbox.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\ui.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\player.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\player_skill.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\bin\client.ilk
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\bin\client.exe
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\bin\client.pdb
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.res
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\axemonster.obj
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\level_gameplay.obj.enc
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\loader.obj.enc
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\monster.obj.enc
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\..\bin\client.exe
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\cl.command.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\cl.read.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\cl.write.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\link.command.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\link.read.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\link.write.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\rc.command.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\rc.read.1.tlog
+c:\users\rkdtm\onedrive\바탕 화면\메이플sr\sr-maple\client\default\x64\debug\client.tlog\rc.write.1.tlog
