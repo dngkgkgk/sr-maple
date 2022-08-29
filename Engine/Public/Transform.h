@@ -64,7 +64,10 @@ public:
 	void Up(_float fTimeDelta);
 	void Down(_float fTimeDelta);
 	void Fall(_float fTimeDelta);
-
+	void Go_RT(_float fTimeDelta);
+	void Go_LT(_float fTimeDelta);
+	void Go_LD(_float fTimeDelta);
+	void Go_RD(_float fTimeDelta);
 	void Jump(_float fTimeDelta, _float fJumpPower, _float fFallSpeed);
 	_float3 Save_Collision_Pos(_float _fTimeDelta);
 

@@ -1,11 +1,13 @@
 #include "..\Public\Object_Manager.h"
 #include "Layer.h"
-#include "CollisionMgr.h"
+
 
 IMPLEMENT_SINGLETON(CObject_Manager)
 
 CObject_Manager::CObject_Manager()
 {
+	pCollision = CCollisionMgr::Get_Instance();
+	Safe_AddRef(pCollision);
 }
 
 HRESULT CObject_Manager::Reserve_Container(_uint iNumLevels)
@@ -102,24 +104,41 @@ bool CObject_Manager::Collision(_uint iLevelIndex, const _tchar * col1, const _t
 	auto iter1 = Find_Layer(iLevelIndex, col1);
 	auto iter2 = Find_Layer(iLevelIndex, col2);
 
-	CCollisionMgr* pCollision = CCollisionMgr::Get_Instance();
-
-	Safe_AddRef(pCollision);
-
 	for (auto& P1 : iter1->Get_ObjectList())
 	{
 		for (auto& P2 : iter2->Get_ObjectList())
 		{
 			if (pCollision->CollisionCheck(P1->Get_Transform(), P2->Get_Transform(), fTimeDelta))
 			{
-				Safe_Release(pCollision);
 				return true;
 			}
 			else if (P1 == iter1->Get_BackObject() && P2 == iter2->Get_BackObject())
 				P1->Get_Transform()->Set_Fall(fTimeDelta);
 		}
 	}
-	Safe_Release(pCollision);	
+	return false;
+}
+
+bool CObject_Manager::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1, const _tchar * col2, _float fTimeDelta)
+{
+	if (iLevelIndex >= m_iNumLevels)
+		return false;
+
+	auto iter1 = Find_Layer(iLevelIndex, col1);
+	auto iter2 = Find_Layer(iLevelIndex, col2);
+
+	for (auto& P1 : iter1->Get_ObjectList())
+	{
+		for (auto& P2 : iter2->Get_ObjectList())
+		{
+			if (pCollision->Collision_Rect_Cube(P1->Get_Transform(), P2->Get_Transform(), fTimeDelta))
+			{
+				return true;
+			} 
+			else if (P1 == iter1->Get_BackObject() && P2 == iter2->Get_BackObject())
+				P1->Get_Transform()->Set_Fall(fTimeDelta);
+		}
+	}
 	return false;
 }
 
@@ -184,7 +203,6 @@ void CObject_Manager::Free()
 
 	m_Prototypes.clear();
 
-
 	Safe_Delete_Array(m_pLayers);
-
+	Safe_Release(pCollision);
 }

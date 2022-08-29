@@ -51,7 +51,7 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 
 	Safe_AddRef(pGameInstance);
 
-	pGameInstance->Collision(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Layer_TestBox"), fTimeDelta);
+	pGameInstance->Collision_Rect_Cube(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Layer_TestBox"), fTimeDelta);
 	//pGameInstance->Collision(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Layer_CubeTerrain"), fTimeDelta);
 
 	++m_iNumRender;

@@ -194,6 +194,17 @@ bool CGameInstance::Collision(_uint iLevelIndex, const _tchar * col1, const _tch
 	return false;
 }
 
+bool CGameInstance::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1, const _tchar * col2, _float fTimeDelta)
+{
+	if (nullptr == m_pObject_Manager)
+		return false;
+
+	if (m_pObject_Manager->Collision_Rect_Cube(iLevelIndex, col1, col2, fTimeDelta))
+		return true;
+
+	return false;
+}
+
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const _tchar * pPrototypeTag, CComponent * pPrototype)
 {
 	if (nullptr == m_pComponent_Manager)
