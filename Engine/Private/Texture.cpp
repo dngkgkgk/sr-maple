@@ -18,6 +18,11 @@ CTexture::CTexture(const CTexture & rhs)
 //Texture.png
 //Texture%d.png
 
+void CTexture::Test()
+{
+	int a = 10;
+}
+
 HRESULT CTexture::Initialize_Prototype(TYPE eType, const _tchar * pTextureFilePath, _uint iNumTexture)
 {
 	m_iNumTextures = iNumTexture;
@@ -59,9 +64,14 @@ HRESULT CTexture::Bind_OnGraphicDev(_uint iIndex)
 //프레임 돌리는 함수
 HRESULT CTexture::Bind_FrameMove()
 {
+	if (m_FrameTexture.FirstFrame < m_FrameTexture.OriginFrame)
+		m_FrameTexture.FirstFrame = m_FrameTexture.OriginFrame;
+	else if(m_FrameTexture.FirstFrame > m_FrameTexture.EndFrame)
+		m_FrameTexture.FirstFrame = m_FrameTexture.OriginFrame;
+
 	m_FrameTexture.FirstFrame += m_FrameTexture.FrameSpeed;
 
-	if (m_FrameTexture.FirstFrame >= m_FrameTexture.EndFrame)
+	if (m_FrameTexture.FirstFrame > m_FrameTexture.EndFrame)
 	{
 		m_FrameTexture.FirstFrame = m_FrameTexture.OriginFrame;
 	}

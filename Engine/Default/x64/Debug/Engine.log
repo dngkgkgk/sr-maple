@@ -1,2 +1,17 @@
-﻿  Engine.vcxproj -> C:\Users\허준석\Desktop\sr팀폴메이플\sr-maple\Engine\Default\..\Bin\Engine.dll
+﻿  Transform.cpp
+  Texture.cpp
+c:\users\허준석\desktop\sr팀폴메이플\sr-maple\engine\private\texture.cpp(79): warning C4244: '인수': 'Engine::_float'에서 'unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Renderer.cpp
+  Object_Manager.cpp
+c:\users\허준석\desktop\sr팀폴메이플\sr-maple\engine\private\object_manager.cpp(119): warning C4800: 'Engine::_float': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Level_Manager.cpp
+  Layer.cpp
+  GameObject.cpp
+  GameInstance.cpp
+  Camera.cpp
+  Component_Manager.cpp
+  CollisionMgr.cpp
+  코드를 생성하고 있습니다...
+     ..\Bin\Engine.lib 라이브러리 및 ..\Bin\Engine.exp 개체를 생성하고 있습니다.
+  Engine.vcxproj -> C:\Users\허준석\Desktop\sr팀폴메이플\sr-maple\Engine\Default\..\Bin\Engine.dll
   Engine.vcxproj -> ..\Bin\Engine.pdb (Full PDB)

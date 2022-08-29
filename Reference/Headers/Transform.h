@@ -31,6 +31,8 @@ public:
 	}
 
 	_float3 Get_Scale(); 
+	
+	_float Get_ScaleX();
 
 	void Set_State(STATE eState, _float3 vState) {
 		memcpy(&m_WorldMatrix.m[eState][0], &vState, sizeof(_float3));
