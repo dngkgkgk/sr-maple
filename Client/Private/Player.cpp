@@ -50,7 +50,7 @@ void CPlayer::Tick(_float fTimeDelta)
 
 	if (GetKeyState(VK_UP) < 0)
 	{
-		if (GetKeyState(VK_RIGHT) < 0)
+		/*if (GetKeyState(VK_RIGHT) < 0)
 		{
 			m_pTransformCom->Go_RT(fTimeDelta);
 			m_ePlayer_State = CPlayer::RT_STATE;
@@ -60,20 +60,21 @@ void CPlayer::Tick(_float fTimeDelta)
 		}
 		else if (GetKeyState(VK_LEFT) < 0)
 		{
-			m_pTransformCom->Go_LT(fTimeDelta);
+			m_pTransformCom->Go_Left(fTimeDelta);
+			m_pTransformCom->Go_Straight(fTimeDelta);
 			m_ePlayer_State = CPlayer::LT_STATE;
 			m_ePlayer_Attack = CPlayer::UP_ATTACK;
 			m_bPlayer_Move = true;
 			m_bPlayer_Idle = false;
 		}
 		else
-		{
+		{*/
 			m_pTransformCom->Go_Straight(fTimeDelta);
 			m_ePlayer_State = CPlayer::UP_STATE;
 			m_ePlayer_Attack = CPlayer::UP_ATTACK;
 			m_bPlayer_Move = true;
 			m_bPlayer_Idle = false;
-		}
+		//}
 	}
 
 	else if (GetKeyState(VK_DOWN) < 0 )
@@ -128,6 +129,32 @@ void CPlayer::Tick(_float fTimeDelta)
 		m_bPlayer_Idle = false;
 
 	}
+	else if (GetKeyState('A') & 0x8000)
+	{
+		m_ePlayer_State = PLAYER_ATTACK;
+
+		if (FAILED(Ready_Layer_Player_Skill(TEXT("Layer_Playe_Skill"), fTimeDelta)));
+		return;
+
+	}
+
+	else if (GetKeyState('X') & 0x8000)
+	{
+		Player_Attack(m_ePlayer_State, m_ePlayer_Attack, fTimeDelta);
+
+		if (FAILED(Ready_Layer_Player_Attack(TEXT("Layer_Playe_Attack"), fTimeDelta)));
+		return;
+
+		/*	CGameInstance* pAttack = CGameInstance::Get_Instance();
+
+		auto player_Attack_= pAttack->Find_Target(LEVEL_GAMEPLAY, TEXT("Layer_Playe_Attack"));
+
+		auto TargetP = player_Attack_->Get_Transform()->Get_State(CTransform::STATE_POSITION);
+
+		player_Attack_->Get_Transform()->Go_Straight(fTimeDelta);*/
+
+	}
+
 
 	_uint			Keyboard;
 	bool			bDown = false;
@@ -218,6 +245,63 @@ void CPlayer::Late_Tick(_float fTimeDelta)
 
 	if (nullptr != m_pRendererCom)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+}
+
+HRESULT CPlayer::Ready_Layer_Player_Skill(const _tchar * pLayerTag, _float fTimeDelta)
+{
+	CGameInstance*			pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	//pGameInstance->AddRef();
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_Player_Skill"), LEVEL_GAMEPLAY, pLayerTag, nullptr)))
+		return E_FAIL;
+
+	m_fSkillTime = m_fSkillTime + 0.5f;
+
+	//if (m_fSkillTime >= 1.f)
+	//{
+	//	//auto Targer =pGameInstance->Find_Target(LEVEL_GAMEPLAY, (TEXT("Layer_Playe_Skill")));
+	//	//pGameInstance->Free();
+
+	//	Safe_Release(pGameInstance);
+
+	//}
+
+	Safe_Release(pGameInstance);
+	return S_OK;
+}
+
+
+HRESULT CPlayer::Ready_Layer_Player_Attack(const _tchar * pLayerTag, _float fTimeDelta)
+{
+	CGameInstance*			pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	//pGameInstance->AddRef();
+
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_Player_Attack"), LEVEL_GAMEPLAY, pLayerTag, nullptr)))
+		return E_FAIL;
+
+	m_fSkillTime = m_fSkillTime + 0.5f;
+
+	auto Monster = pGameInstance->Find_Target(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
+
+
+	Safe_Release(pGameInstance);
+
+	//_float3		vPosition = Get_State(CTransform::STATE_POSITION);
+
+	//_float3		vLook = vPoint - vPosition;
+
+	//_float3		vRight = *D3DXVec3Cross(&vRight, &_float3(0.f, 1.f, 0.f), &vLook);
+
+	//_float3		vUp = *D3DXVec3Cross(&vUp, &vLook, &vRight);
+
+	//_float3		vScale = Get_Scale();
+
+	//Set_State(CTransform::STATE_RIGHT, *D3DXVec3Normalize(&vRight, &vRight) * vScale.x);
+	//Set_State(CTransform::STATE_UP, *D3DXVec3Normalize(&vUp, &vUp) * vScale.y);
+	//Set_State(CTransform::STATE_LOOK, *D3DXVec3Normalize(&vLook, &vLook) * vScale.z);
+	//}
+	return S_OK;
 }
 
 HRESULT CPlayer::Render()

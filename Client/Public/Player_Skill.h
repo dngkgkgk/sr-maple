@@ -42,6 +42,13 @@ private:
 	HRESULT Release_RenderState();
 
 public:
+	void LiteNing_Skill(_float _Player_Skill, _float fTimeDelta);
+	void Fireball_Skill(_float _Player_Skill, _float fTimeDelta);
+	/*void LiteNing_Skill(_float _Player_Skill, _float fTimeDelta);
+	void LiteNing_Skill(_float _Player_Skill, _float fTimeDelta);
+*/
+
+public:
 	static CPlayer_Skill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg = nullptr) override;
 	virtual void Free() override;
