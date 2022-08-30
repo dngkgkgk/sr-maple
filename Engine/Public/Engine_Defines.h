@@ -6,6 +6,8 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
+#include <directxcollision.h>
+
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 
@@ -24,6 +26,7 @@ using namespace std;
 #include "Engine_Struct.h"
 #include "Engine_Typedef.h"
 
+#define		VK_MAX		0xff
 
 #ifdef _DEBUG
 

@@ -7,9 +7,6 @@ CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 }
 
-//Trse
-//Test_
-
 CPlayer::CPlayer(const CPlayer & rhs)
 	: CGameObject(rhs)
 {

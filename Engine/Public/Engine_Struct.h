@@ -51,15 +51,5 @@ namespace Engine
 
 	}GRAPHIC_DESC;
 
-	//프레임 구조체;
-	typedef struct tagFrame
-	{
-		unsigned int FirstFrame;
-		unsigned int EndFrame;
-		float		 FrameTime;
-		float	     FrameSpeed;
-
-	}FRAMETEXTURE;
-
 }
 
