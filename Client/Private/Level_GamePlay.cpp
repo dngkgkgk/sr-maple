@@ -35,7 +35,7 @@ HRESULT CLevel_GamePlay::Initialize()
 	/*if (FAILED(Ready_Layer_CubeTerrain(TEXT("Layer_CubeTerrain"))))
 		return E_FAIL;*/
 	
-	if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
+	if (FAILED(Ready_Layer_UI(TEXT("Layer_GamePlay_UI"))))
 		return E_FAIL;
 
 	
@@ -192,8 +192,62 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	CGameInstance*			pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_UI"), LEVEL_GAMEPLAY, pLayerTag)))
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_InventoryUI"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_PlayerInfoUI"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_SkillbookUI"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_ExpBarUI"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_HpbarUI"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	for (_uint i = 0; i < 8; ++i)
+	{
+		_float3 vPos = {};
+
+		if (i < 4)
+		{
+			vPos.x = 70.f * i;
+			vPos.y = 600.f;
+		}
+		else if (i >= 4)
+		{
+			vPos.x = 70.f * i - 270.f;
+			vPos.y = 670.f;
+		}
+		vPos.z = 0.f;
+
+		if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_SkillInfoUI"), LEVEL_GAMEPLAY, pLayerTag, &vPos)))
+			return E_FAIL;
+	}
+
+	for (_uint i = 0; i < 8; ++i)
+	{
+		_float3 vPos = {};
+
+		if (i < 4)
+		{
+			vPos.x = 70.f * i;
+			vPos.y = 600.f;
+		}
+		else if (i >= 4)
+		{
+			vPos.x = 70.f * i - 290.f;
+			vPos.y = 670.f;
+		}
+		vPos.z = 0.f;
+
+		if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_ItemInfoUI"), LEVEL_GAMEPLAY, pLayerTag, &vPos)))
+			return E_FAIL;
+	}
+
+
 
 	Safe_Release(pGameInstance);
 

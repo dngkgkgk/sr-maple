@@ -14,7 +14,7 @@ HRESULT CLevel_Logo::Initialize()
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
+	if (FAILED(Ready_Layer_UI(TEXT("Layer_Logo_UI"))))
 		return E_FAIL;
 
 	return S_OK;
@@ -45,12 +45,12 @@ void CLevel_Logo::Late_Tick(_float fTimeDelta)
 	//zzzzSetWindowText(g_hWnd, TEXT("로고레벨입니다."));
 }
 
-HRESULT CLevel_Logo::Ready_Layer_BackGround(const _tchar * pLayerTag)
+HRESULT CLevel_Logo::Ready_Layer_UI(const _tchar * pLayerTag)
 {
 	CGameInstance*			pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_BackGround"), LEVEL_LOGO, pLayerTag, nullptr)))
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_LogoUI"), LEVEL_LOGO, pLayerTag, nullptr)))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
