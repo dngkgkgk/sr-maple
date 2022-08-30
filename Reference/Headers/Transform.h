@@ -70,6 +70,7 @@ public:
 	void Go_RD(_float fTimeDelta);
 	void Jump(_float fTimeDelta, _float fJumpPower, _float fFallSpeed);
 	_float3 Save_Collision_Pos(_float _fTimeDelta);
+	void Attacked_Move(_float3 vcolPos, _float fTimeDelta);
 
 private:
 	_float4x4			m_WorldMatrix;

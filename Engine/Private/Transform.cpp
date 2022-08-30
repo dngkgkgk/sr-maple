@@ -206,6 +206,17 @@ _float3 CTransform::Save_Collision_Pos(_float _fTimeDelta)
 	return m_fSavePos;
 }
 
+void CTransform::Attacked_Move(_float3 vcolPos, _float fTimeDelta)
+{
+	_float3 vPos = Get_State(STATE_POSITION);
+
+	_float3 vLook = vPos-vcolPos;
+
+	vPos += *D3DXVec3Normalize(&vLook, &vLook)*fTimeDelta*m_TransformDesc.fSpeedPerSec;
+
+	Set_State(STATE_POSITION, vPos);
+}
+
 void CTransform::LookAt(_float3 vPoint)
 {
 	_float3		vPosition = Get_State(CTransform::STATE_POSITION);

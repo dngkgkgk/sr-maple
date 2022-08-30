@@ -202,6 +202,14 @@ int CGameInstance::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1, c
 	return m_pObject_Manager->Collision_Rect_Cube(iLevelIndex, col1, col2, fTimeDelta);
 }
 
+bool CGameInstance::Collision_Attacked(_uint iLevelIndex, const _tchar * col1, const _tchar * col2, _float fTimeDelta, int ioption)
+{
+	if (nullptr == m_pObject_Manager)
+		return false;
+
+	return m_pObject_Manager->Collision_Attacked(iLevelIndex, col1, col2, fTimeDelta,ioption);
+}
+
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const _tchar * pPrototypeTag, CComponent * pPrototype)
 {
 	if (nullptr == m_pComponent_Manager)

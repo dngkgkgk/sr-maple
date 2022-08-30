@@ -47,6 +47,7 @@ public: /* For.Object_Manager */
 	class CGameObject* Get_BackObject(_uint iLevelIndex, const _tchar* pLayerTag);
 	bool Collision(_uint iLevelIndex, const _tchar* col1, const _tchar* col2, _float fTimeDelta);
 	int Collision_Rect_Cube(_uint iLevelIndex, const _tchar* col1, const _tchar* col2, _float fTimeDelta);
+	bool Collision_Attacked(_uint iLevelIndex, const _tchar* col1, const _tchar* col2, _float fTimeDelta, int ioption);
 public: /* For.Component_Manager */
 	HRESULT Add_Prototype(_uint iLevelIndex, const _tchar* pPrototypeTag, class CComponent* pPrototype);
 	class CComponent* Clone_Component(_uint iLevelIndex, const _tchar* pPrototypeTag, void* pArg = nullptr);

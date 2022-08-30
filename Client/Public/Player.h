@@ -55,7 +55,7 @@ private:
 
 	_float m_fFallSpeed = 0.f;
 	_float m_fMaxFallSpeed = 3.f;
-	_float m_fJumpPower = 0.f;
+	_float m_fJumpPower = 0.f; //점프, 블럭에서 떨어지는 행동 관련 
 
 	_float m_uFrameNum = 0;
 
