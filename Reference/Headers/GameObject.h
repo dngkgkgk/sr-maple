@@ -21,6 +21,7 @@ public:
 	virtual HRESULT Render();
 public:
 	virtual CTransform* Get_Transform() { return m_pTransformCom; }
+	virtual _bool		Get_Dead() { return m_bDead; }
 
 protected:
 	LPDIRECT3DDEVICE9			m_pGraphic_Device = nullptr;
@@ -36,6 +37,7 @@ protected:
 
 protected:
 	CTransform*				m_pTransformCom = nullptr;
+	_bool					m_bDead = false;
 public:	
 	virtual CGameObject* Clone(void* pArg = nullptr) = 0;
 	virtual void Free() override;
