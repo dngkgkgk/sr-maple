@@ -82,7 +82,7 @@ HRESULT CLupangMonster::SetUp_Components()
 		return E_FAIL;
 
 
-	m_pGameInstance = CGameInstance::Get_Instance();
+	CGameInstance* m_pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(m_pGameInstance);
 
 	pPlayer = m_pGameInstance->Find_Target(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
@@ -152,7 +152,7 @@ void CLupangMonster::MonsterMove()
 
 		if (fCurrentFrame >= 9 && fCurrentFrame < 9+0.05f)
 		{
-			m_pGameInstance = CGameInstance::Get_Instance();
+			CGameInstance* m_pGameInstance = CGameInstance::Get_Instance();
 			Safe_AddRef(m_pGameInstance);
 
 			_float3 vPosition = m_pTransformCom->Get_State(CTransform::STATE_POSITION);

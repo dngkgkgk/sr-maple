@@ -33,13 +33,9 @@ public:
 protected: /* For.Components */
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
-<<<<<<< HEAD
 	CVIBuffer_Rect*			m_pVIBufferCom = nullptr;
-=======
-	CTransform*			m_pTransformCom = nullptr;
-	CVIBuffer_Rect*	m_pVIBufferCom = nullptr;
-	CGameInstance*	m_pGameInstance = nullptr;
->>>>>>> develop
+	
+
 
 protected:
 	STATE m_eState = STATE_IDLE;

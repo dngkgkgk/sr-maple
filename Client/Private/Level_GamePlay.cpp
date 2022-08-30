@@ -57,8 +57,7 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 		Player->Get_Transform()->Set_Fall(true);
 
 	pGameInstance->Collision_Attacked(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Layer_Monster"), fTimeDelta, 0);
-		
-
+	
 	//pGameInstance->Collision(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Layer_CubeTerrain"), fTimeDelta);
 
 	++m_iNumRender;

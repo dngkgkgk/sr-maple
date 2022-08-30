@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "..\Public\LupangSkill.h"
+#include "GameInstance.h"
 
 CLupangSkill::CLupangSkill(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
@@ -40,6 +41,18 @@ void CLupangSkill::Tick(_float fTimeDelta)
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 
 	vPos = vPos + m_vMyLook * 0.1f;
+
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	Safe_AddRef(pGameInstance);
+
+	if (pGameInstance->Collision_Attacked(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Monkey_Skill"), fTimeDelta, 1))
+	{
+		Safe_Release(pGameInstance);
+		return;
+	}
+
+	Safe_Release(pGameInstance);
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPos);
 }

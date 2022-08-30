@@ -132,7 +132,7 @@ bool CObject_Manager::Collision_Attacked(_uint iLevelIndex, const _tchar * col1,
 				if (ioption == 0)
 					P1->Get_Transform()->Attacked_Move(P2->Get_Transform()->Get_State(CTransform::STATE_POSITION), fTimeDelta);
 				else if (ioption == 1)
-					P1->Free();
+					Safe_Release(P2);
 				return true;
 			}
 		}
