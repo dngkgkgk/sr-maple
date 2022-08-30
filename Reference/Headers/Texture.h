@@ -25,6 +25,9 @@ private:
 	virtual ~CTexture() = default;
 
 public:
+	void Test();
+
+public:
 	HRESULT Initialize_Prototype(TYPE eType, const _tchar* pTextureFilePath, _uint iNumTexture);
 	HRESULT Initialize(void* pArg) override;
 

@@ -55,11 +55,14 @@
     <Filter Include="02.GameObject\Monster">
       <UniqueIdentifier>{ab851b9c-4d89-4208-84f3-bfd8429b29a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Monster\AxeMonster">
-      <UniqueIdentifier>{746451ef-1918-4c08-8356-2623371d83d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\Player\Skill">
       <UniqueIdentifier>{1e98960f-6797-469c-b505-07f7a5f5830a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Monster\LupangMonster">
+      <UniqueIdentifier>{746451ef-1918-4c08-8356-2623371d83d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Monster\LupangMonster\LupangSkill">
+      <UniqueIdentifier>{2808bf90-8294-4d2b-87ec-519e32e333bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +129,12 @@
     <ClInclude Include="..\Public\Player_Skill.h">
       <Filter>02.GameObject\Player\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\LupangMonster.h">
+      <Filter>02.GameObject\Monster\LupangMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\LupangSkill.h">
+      <Filter>02.GameObject\Monster\LupangMonster\LupangSkill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\MainApp.cpp">
@@ -178,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\Player_Skill.cpp">
       <Filter>02.GameObject\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\LupangMonster.cpp">
+      <Filter>02.GameObject\Monster\LupangMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\LupangSkill.cpp">
+      <Filter>02.GameObject\Monster\LupangMonster\LupangSkill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
