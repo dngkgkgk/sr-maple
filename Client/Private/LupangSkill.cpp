@@ -48,6 +48,7 @@ void CLupangSkill::Tick(_float fTimeDelta)
 
 	if (pGameInstance->Collision_Attacked(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Monkey_Skill"), fTimeDelta, 1))
 	{
+		m_bDead = true;
 		Safe_Release(pGameInstance);
 		return;
 	}
