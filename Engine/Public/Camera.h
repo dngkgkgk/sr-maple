@@ -26,8 +26,6 @@ protected:
 	CCamera(const CCamera& rhs);
 	virtual ~CCamera() = default;
 
-	
-
 public:
 	virtual HRESULT Initialize_Prototype();
 	virtual HRESULT Initialize(void* pArg);

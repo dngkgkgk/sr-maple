@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Base.h"
-#include "CollisionMgr.h"
 
 /*  생성된 게임오브젝트들을 모아서 보관한다. : 사용자가 나누고 싶은 기준에 따라. */
 
@@ -23,8 +22,6 @@ public:
 	void Clear(_uint iLevelIndex);
 public:
 	bool Collision(_uint iLevelIndex, const _tchar* col1, const _tchar* col2, _float fTimeDelta);
-	bool Collision_Attacked(_uint iLevelIndex, const _tchar* col1, const _tchar* col2, _float fTimeDelta, int ioption);
-	int Collision_Rect_Cube(_uint iLevelIndex, const _tchar* col1, const _tchar* col2, _float fTimeDelta);
 	class CGameObject* Find_Target(_uint iLevelIndex, const _tchar* pLayerTag);
 	class CGameObject* Get_BackObject(_uint iLevelIndex, const _tchar* pLayerTag);
 private:
@@ -40,7 +37,6 @@ private:
 	class CGameObject* Find_Prototype(const _tchar* pPrototypeTag);
 	class CLayer* Find_Layer(_uint iLevelIndex, const _tchar* pLayerTag);
 
-	CCollisionMgr* pCollision=nullptr;
 
 public:
 	virtual void Free() override;

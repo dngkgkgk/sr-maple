@@ -31,8 +31,6 @@ public:
 	}
 
 	_float3 Get_Scale(); 
-	
-	_float Get_ScaleX();
 
 	void Set_State(STATE eState, _float3 vState) {
 		memcpy(&m_WorldMatrix.m[eState][0], &vState, sizeof(_float3));
@@ -42,13 +40,7 @@ public:
 	}
 
 	void Set_Scaled(_float3 vScale);
-	void Set_Jump(_bool bJump) { m_bJump = bJump; }
-	_bool Get_Jump() { return m_bJump; }
-	void Set_Fall(_bool bFall) { m_bFall = bFall; }
-	_bool Get_Fall() { return m_bFall; }
-	void Set_SecSavePosOn(_bool bSavePos) { m_bSecSave = bSavePos; }
-	_bool Check_SecSavePos() { return m_bSecSave; }
-	_float3 Get_Collision_Pos() { return m_fSavePos; }
+
 public:
 	virtual HRESULT Initialize_Prototype();
 	virtual HRESULT Initialize(void* pArg);
@@ -66,23 +58,10 @@ public:
 	void Up(_float fTimeDelta);
 	void Down(_float fTimeDelta);
 	void Fall(_float fTimeDelta);
-	void Go_RT(_float fTimeDelta);
-	void Go_LT(_float fTimeDelta);
-	void Go_LD(_float fTimeDelta);
-	void Go_RD(_float fTimeDelta);
-	void Jump(_float fTimeDelta, _float fJumpPower, _float fFallSpeed);
-	_float3 Save_Collision_Pos(_float _fTimeDelta);
-	void Attacked_Move(_float3 vcolPos, _float fTimeDelta);
-
 private:
 	_float4x4			m_WorldMatrix;
 	TRANSFORMDESC		m_TransformDesc;
-	_float				m_fGravity=0.f;
-	_bool				m_bJump=false;
-	_bool				m_bFall = false;
-	_float3				m_fSavePos;
-	_float3				m_fSecSavePos;
-	_bool				m_bSecSave=false;
+
 public:
 	static CTransform* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CComponent* Clone(void* pArg = nullptr) override;

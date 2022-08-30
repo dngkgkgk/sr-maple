@@ -9,11 +9,9 @@ CGameInstance::CGameInstance()
 	, m_pObject_Manager(CObject_Manager::Get_Instance())
 	, m_pTimer_Manager(CTimer_Manager::Get_Instance())
 	, m_pComponent_Manager(CComponent_Manager::Get_Instance())
-	//, m_pKeyComponent_Manager(CComponent_Manager::Get_Instance())
-
 {
 
-	//Safe_AddRef(m_pKeyComponent_Manager);
+
 	Safe_AddRef(m_pComponent_Manager);
 	Safe_AddRef(m_pTimer_Manager);
 	Safe_AddRef(m_pObject_Manager);
@@ -192,22 +190,6 @@ bool CGameInstance::Collision(_uint iLevelIndex, const _tchar * col1, const _tch
 		return true;
 
 	return false;
-}
-
-int CGameInstance::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1, const _tchar * col2, _float fTimeDelta)
-{
-	if (nullptr == m_pObject_Manager)
-		return false;
-
-	return m_pObject_Manager->Collision_Rect_Cube(iLevelIndex, col1, col2, fTimeDelta);
-}
-
-bool CGameInstance::Collision_Attacked(_uint iLevelIndex, const _tchar * col1, const _tchar * col2, _float fTimeDelta, int ioption)
-{
-	if (nullptr == m_pObject_Manager)
-		return false;
-
-	return m_pObject_Manager->Collision_Attacked(iLevelIndex, col1, col2, fTimeDelta,ioption);
 }
 
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const _tchar * pPrototypeTag, CComponent * pPrototype)

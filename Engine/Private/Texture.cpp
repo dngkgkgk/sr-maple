@@ -18,11 +18,6 @@ CTexture::CTexture(const CTexture & rhs)
 //Texture.png
 //Texture%d.png
 
-void CTexture::Test()
-{
-	int a = 10;
-}
-
 HRESULT CTexture::Initialize_Prototype(TYPE eType, const _tchar * pTextureFilePath, _uint iNumTexture)
 {
 	m_iNumTextures = iNumTexture;
@@ -48,9 +43,6 @@ HRESULT CTexture::Initialize_Prototype(TYPE eType, const _tchar * pTextureFilePa
 
 HRESULT CTexture::Initialize(void * pArg)
 {
-	if (nullptr != pArg)
-		memcpy(&m_FrameTexture, pArg, sizeof(FRAMETEXTURE));
-
 	return S_OK;
 }
 
@@ -62,22 +54,23 @@ HRESULT CTexture::Bind_OnGraphicDev(_uint iIndex)
 	return m_pGraphic_Device->SetTexture(0, m_Textures[iIndex]);	
 }
 //프레임 돌리는 함수
-HRESULT CTexture::Bind_FrameMove()
+HRESULT CTexture::Bind_FrameMove(_uint _uFirstFrame, _uint _EndFrame, _float _fFrameSpeed, _float fTimeDelta)
 {
-	if (m_FrameTexture.FirstFrame < m_FrameTexture.OriginFrame)
-		m_FrameTexture.FirstFrame = m_FrameTexture.OriginFrame;
-	else if(m_FrameTexture.FirstFrame > m_FrameTexture.EndFrame)
-		m_FrameTexture.FirstFrame = m_FrameTexture.OriginFrame;
-
-	m_FrameTexture.FirstFrame += m_FrameTexture.FrameSpeed;
-
-	if (m_FrameTexture.FirstFrame > m_FrameTexture.EndFrame)
+	
+	m_FrameTexture.EndFrame=_EndFrame;
+	m_FrameTexture.FrameSpeed=_fFrameSpeed;
+	m_FrameTexture.FrameTime=fTimeDelta;
+	/*for (m_FrameTexture.FirstFrame = _uFirstFrame; m_FrameTexture.FirstFrame <= m_FrameTexture.EndFrame; ++m_FrameTexture.FirstFrame)
 	{
-		m_FrameTexture.FirstFrame = m_FrameTexture.OriginFrame;
+		if (m_FrameTexture.FirstFrame == m_FrameTexture.EndFrame)
+		{
+
+		}
+	}*/
+	if (m_FrameTexture.FrameTime >= m_FrameTexture.FrameSpeed)
+	{
+
 	}
-
-	m_pGraphic_Device->SetTexture(0, m_Textures[m_FrameTexture.FirstFrame]);
-
 	return S_OK;
 }
 

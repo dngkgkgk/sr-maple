@@ -58,12 +58,6 @@
     <Filter Include="02.GameObject\Monster\AxeMonster">
       <UniqueIdentifier>{746451ef-1918-4c08-8356-2623371d83d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Player\Skill">
-      <UniqueIdentifier>{1e98960f-6797-469c-b505-07f7a5f5830a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Player\Player_Attack">
-      <UniqueIdentifier>{6d91d39d-0d9a-49db-a2b0-de6226f2e0cf}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -126,12 +120,6 @@
     <ClInclude Include="..\Public\Monster.h">
       <Filter>02.GameObject\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Player_Skill.h">
-      <Filter>02.GameObject\Player\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Player_Attack.h">
-      <Filter>02.GameObject\Player\Player_Attack</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\MainApp.cpp">
@@ -181,12 +169,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\Monster.cpp">
       <Filter>02.GameObject\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Attack.cpp">
-      <Filter>02.GameObject\Player\Player_Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Skill.cpp">
-      <Filter>02.GameObject\Player\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

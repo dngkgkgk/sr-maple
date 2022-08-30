@@ -9,7 +9,6 @@ namespace Client
 }
 
 #include <process.h>
-#include <ctime>
 
 // Client_Defines.h
 

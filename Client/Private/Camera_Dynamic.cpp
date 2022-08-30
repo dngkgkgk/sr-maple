@@ -25,7 +25,7 @@ HRESULT CCamera_Dynamic::Initialize(void* pArg)
 {
 	if (FAILED(__super::Initialize(&((CAMERADESC_DERIVED*)pArg)->CameraDesc)))
 		return E_FAIL;
-
+	
 
 	return S_OK;
 }
@@ -34,11 +34,11 @@ void CCamera_Dynamic::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
 
-	CGameInstance*         pGameInstance = CGameInstance::Get_Instance();
+	CGameInstance*			pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
 	//카메라 위치 고정
-	auto player = pGameInstance->Find_Target(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
+	auto player= pGameInstance->Find_Target(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
 
 	_float3 PlayerPos = dynamic_cast<CPlayer*>(player)->Get_TransformCom()->Get_State(CTransform::STATE_POSITION);
 
@@ -49,8 +49,8 @@ void CCamera_Dynamic::Tick(_float fTimeDelta)
 	//m_pTransform->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta * 15.f);
 
 	//페이지 업다운으로 카메라 줌인, 줌아웃 기능
-	_long         MouseMove = 0;
-	bool         bDown = false;
+	_long			MouseMove = 0;
+	bool			bDown = false;
 	if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_WHEEL))
 	{
 		if (MouseMove < 0)
@@ -61,7 +61,7 @@ void CCamera_Dynamic::Tick(_float fTimeDelta)
 			m_fCameraZoomY += 0.42f;
 			m_fCameraZoomZ += 0.3f;
 		}
-		else if (!bDown&&m_fCameraZoomY>0.5) //줌인
+		else if(!bDown&&m_fCameraZoomY>0.5) //줌인
 		{
 			m_fCameraZoomY -= 0.42f;
 			m_fCameraZoomZ -= 0.3f;
@@ -71,8 +71,8 @@ void CCamera_Dynamic::Tick(_float fTimeDelta)
 	/*
 	if (GetKeyState(VK_RIGHT) < 0)
 	{
-	m_pTransform->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta);
-	// m_pTransformCom->Go_Right(fTimeDelta);
+		m_pTransform->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta);
+		// m_pTransformCom->Go_Right(fTimeDelta);
 	}
 	*/
 
@@ -95,13 +95,13 @@ HRESULT CCamera_Dynamic::Render()
 	if (FAILED(__super::Render()))
 		return E_FAIL;
 
-
+	
 	return S_OK;
 }
 
 CCamera_Dynamic * CCamera_Dynamic::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CCamera_Dynamic*   pInstance = new CCamera_Dynamic(pGraphic_Device);
+	CCamera_Dynamic*	pInstance = new CCamera_Dynamic(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
@@ -114,7 +114,7 @@ CCamera_Dynamic * CCamera_Dynamic::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 CGameObject * CCamera_Dynamic::Clone(void* pArg)
 {
-	CCamera_Dynamic*   pInstance = new CCamera_Dynamic(*this);
+	CCamera_Dynamic*	pInstance = new CCamera_Dynamic(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
@@ -129,5 +129,5 @@ void CCamera_Dynamic::Free()
 {
 	__super::Free();
 
-
+	
 }
