@@ -14,7 +14,7 @@ BEGIN(Client)
 
 class CMonster final : public CGameObject
 {
-	enum STATE { STATE_LEFT, STATE_RIGHT, STATE_UP, STATE_DOWN, STATE_END };
+	enum STATE {STATE_IDLE, STATE_LEFT, STATE_RIGHT, STATE_ATTACK, STATE_END };
 
 private:
 	CMonster(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -31,12 +31,13 @@ public:
 private: /* For.Components */
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
-	CTransform*				m_pTransformCom = nullptr;
+	//CTransform*				m_pTransformCom = nullptr;
 	CVIBuffer_Rect*			m_pVIBufferCom = nullptr;
 
 private:
-	_float iTest = 0;
-	STATE m_eState = STATE_RIGHT;
+	STATE m_eState = STATE_LEFT;
+	STATE m_ePrevState = STATE_END;
+	_float m_iTextureCount = 0.f;
 
 public:
 	virtual HRESULT SetUp_Components();
