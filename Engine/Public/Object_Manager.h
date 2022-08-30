@@ -40,8 +40,6 @@ private:
 	class CGameObject* Find_Prototype(const _tchar* pPrototypeTag);
 	class CLayer* Find_Layer(_uint iLevelIndex, const _tchar* pLayerTag);
 
-	CCollisionMgr* pCollision=nullptr;
-
 public:
 	virtual void Free() override;
 };

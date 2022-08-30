@@ -58,6 +58,10 @@ void CPlayer_Skill::Tick(_float fTimeDelta)
 	{
 		ERR_MSG(L"Ãæµ¹");
 	}*/
+	CGameInstance*			pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	pGameInstance->Collision_Attacked(LEVEL_GAMEPLAY, TEXT("Layer_Playe_Skill"), TEXT("Layer_Monster"), fTimeDelta, 1);
 
 	m_fSkill_Frame = m_fSkill_Frame + 0.2f;
 
@@ -73,10 +77,6 @@ void CPlayer_Skill::Tick(_float fTimeDelta)
 
 	for (_uint i = 0; i < 5; i++)
 	{
-
-		CGameInstance*			pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
 		auto Player_Pos = pGameInstance->Find_Target(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
 
 
@@ -88,12 +88,9 @@ void CPlayer_Skill::Tick(_float fTimeDelta)
 		Target += *D3DXVec3Normalize(&TargetPos, &TargetPos) * fTimeDelta * 20;
 
 		m_pTransformCom->Set_Scaled(_float3(m_fSizeX, m_fSizeY, 1.f));
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, Target);
-
-
-		Safe_Release(pGameInstance);
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, Target);		
 	}
-
+	Safe_Release(pGameInstance);
 }
 
 void CPlayer_Skill::Late_Tick(_float fTimeDelta)
@@ -170,7 +167,6 @@ HRESULT CPlayer_Skill::SetUp_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	//m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 250);
 	//m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL);
-
 	//m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
 	return S_OK;

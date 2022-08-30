@@ -6,8 +6,6 @@ IMPLEMENT_SINGLETON(CObject_Manager)
 
 CObject_Manager::CObject_Manager()
 {
-	pCollision = CCollisionMgr::Get_Instance();
-	Safe_AddRef(pCollision);
 }
 
 HRESULT CObject_Manager::Reserve_Container(_uint iNumLevels)
@@ -102,6 +100,10 @@ bool CObject_Manager::Collision(_uint iLevelIndex, const _tchar * col1, const _t
 	auto iter1 = Find_Layer(iLevelIndex, col1);
 	auto iter2 = Find_Layer(iLevelIndex, col2);
 
+	CCollisionMgr* pCollision = CCollisionMgr::Get_Instance();
+
+	Safe_AddRef(pCollision);
+
 	for (auto& P1 : iter1->Get_ObjectList())
 	{
 		for (auto& P2 : iter2->Get_ObjectList())
@@ -112,6 +114,9 @@ bool CObject_Manager::Collision(_uint iLevelIndex, const _tchar * col1, const _t
 			}
 		}
 	}
+
+	Safe_Release(pCollision);
+
 	return false;
 }
 
@@ -123,6 +128,10 @@ bool CObject_Manager::Collision_Attacked(_uint iLevelIndex, const _tchar * col1,
 	auto iter1 = Find_Layer(iLevelIndex, col1);
 	auto iter2 = Find_Layer(iLevelIndex, col2);
 
+	CCollisionMgr* pCollision = CCollisionMgr::Get_Instance();
+
+	Safe_AddRef(pCollision);
+
 	for (auto& P1 : iter1->Get_ObjectList())
 	{
 		for (auto& P2 : iter2->Get_ObjectList())
@@ -131,10 +140,15 @@ bool CObject_Manager::Collision_Attacked(_uint iLevelIndex, const _tchar * col1,
 			{
 				if (ioption == 0)
 					P1->Get_Transform()->Attacked_Move(P2->Get_Transform()->Get_State(CTransform::STATE_POSITION), fTimeDelta);
+				if (ioption == 1)
+					P2->Set_Dead(true);
 				return true;
 			}
 		}
 	}
+
+	Safe_Release(pCollision);
+
 	return false;
 }
 
@@ -148,6 +162,10 @@ int CObject_Manager::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1,
 	auto iter1 = Find_Layer(iLevelIndex, col1);
 	auto iter2 = Find_Layer(iLevelIndex, col2);
 
+	CCollisionMgr* pCollision = CCollisionMgr::Get_Instance();
+
+	Safe_AddRef(pCollision);
+
 	for (auto& P1 : iter1->Get_ObjectList())
 	{
 		for (auto& P2 : iter2->Get_ObjectList())
@@ -158,6 +176,8 @@ int CObject_Manager::Collision_Rect_Cube(_uint iLevelIndex, const _tchar * col1,
 			}
 		}
 	}
+
+	Safe_Release(pCollision);
 
 	return iReturn;
 }
@@ -224,6 +244,4 @@ void CObject_Manager::Free()
 	m_Prototypes.clear();
 
 	Safe_Delete_Array(m_pLayers);
-
-	Safe_Release(pCollision);
 }

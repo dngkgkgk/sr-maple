@@ -22,6 +22,7 @@ public:
 public:
 	virtual CTransform* Get_Transform() { return m_pTransformCom; }
 	virtual _bool		Get_Dead() { return m_bDead; }
+	virtual void		Set_Dead(_bool Dead) { m_bDead= Dead; }
 
 protected:
 	LPDIRECT3DDEVICE9			m_pGraphic_Device = nullptr;
